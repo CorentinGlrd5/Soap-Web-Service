@@ -3,37 +3,92 @@
 	targetNamespace="http://nantes.ynov.com/soap/book"
 	elementFormDefault="qualified">
 
-	<!-- Entité exposée -->
 	<xs:complexType name="book">
 		<xs:sequence>
-			<!-- Ici ses attributs -->
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="title" type="xs:string" />
+			<xs:element name="publisheddate" type="xs:string" />
+			<xs:element name="isbn" type="xs:int" />
+			<xs:element name="author" type="xs:int" />
 		</xs:sequence>
 	</xs:complexType>
 
-	<!-- Récupérer un livre par son titre -->
-	<xs:element name="getBookByTitleRequest">
+	<xs:element name="getBookByIdRequest">
 		<xs:complexType>
 			<xs:sequence>
-				<!-- Ici les arguments pour appeler la méthode : 1, 2 arguements ? Au 
-					choix -->
+				<xs:element name="id" type="xs:int" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name="getBookResponse">
-		<!-- A compléter : quel type d'objet doit-on retourner ici -->
+	<xs:element name="getBookByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="book" type="tns:book" />
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
 
-	<!-- Récupérer l'ensemble des livres -->
-	<!-- Request / Response -->
+	<xs:element name="getBookAllRequest">
+	</xs:element>
 
-	<!-- Ajouter un livre -->
-	<!-- Request / Response -->
+	<xs:element name="getBookAllResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="book" type="tns:book" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
-	<!-- Supprimer un livre -->
-	<!-- Request / Response -->
+	<xs:element name="addBookRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="firstname" type="xs:string" />
+				<xs:element name="lastname" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="addBookResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="book" type="tns:book" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	
-	<!-- Etc. pour les autres méthodes. -->
+	<xs:element name="updateBookRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:int" />
+				<xs:element name="firstname" type="xs:string" />
+				<xs:element name="lastname" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
+	<xs:element name="updateBookResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="book" type="tns:book" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteBookRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteAuthorResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="book" type="tns:book" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 </xs:schema>

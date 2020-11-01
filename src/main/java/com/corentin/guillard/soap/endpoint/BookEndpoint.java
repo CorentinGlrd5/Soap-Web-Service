@@ -7,6 +7,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.corentin.guillard.soap.repository.BookRepository;
+import com.ynov.nantes.soap.book.GetBookByIdRequest;
+import com.ynov.nantes.soap.book.GetBookByIdResponse;
 
 @Endpoint
 public class BookEndpoint {
@@ -20,11 +22,13 @@ public class BookEndpoint {
 		this.bookRepository = bookRepository;
 	}
 	
-	
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getBookRequest")
 	@ResponsePayload
-	public GetAuthorResponse getBook(@RequestPayload GetBookRequest request) {
-		return null;
+	public GetBookByIdResponse getBookById(@RequestPayload GetBookByIdRequest request) {
+		GetBookByIdResponse response = new GetBookByIdResponse();
+		response.setBook(bookRepository.findById(request.getId()));
+		return response;
 	}
+	
 
 }

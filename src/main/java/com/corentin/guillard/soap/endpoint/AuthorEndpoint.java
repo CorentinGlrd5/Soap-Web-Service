@@ -7,6 +7,9 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.corentin.guillard.soap.repository.AuthorRepository;
+import com.ynov.nantes.soap.author.GetAuthorByIdRequest;
+import com.ynov.nantes.soap.author.GetAuthorByIdResponse;
+import com.ynov.nantes.soap.book.GetBookByIdResponse;
 
 @Endpoint
 public class AuthorEndpoint {
@@ -20,9 +23,13 @@ public class AuthorEndpoint {
 		this.authorRepository = authorRepository;
 	}
 	
+	
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAuthorRequest")
 	@ResponsePayload
-	public GetAuthorResponse getAuthor(@RequestPayload GetAuthorRequest request) {
-		return null;
+	public GetAuthorByIdResponse getAuthor(@RequestPayload GetAuthorByIdRequest request) {
+		GetAuthorByIdResponse response = new GetAuthorByIdResponse();
+		response.setAuthor(authorRepository.findById(request.getId()));
+		return response;
 	}
+	
 }
